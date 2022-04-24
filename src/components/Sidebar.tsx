@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import Modalbox from "./Modalbox";
 import cn from "classnames";
 
 const Sidebar = () => {
-  const topics = ["#general", "#random"];
+  const topics = useSelector((state: any) => state.channel.topics);
   const [activeButton, setActiveButton] = useState(0);
 
   return (
@@ -30,7 +31,7 @@ const Sidebar = () => {
         <Modalbox />
       </div>
       <ul className="nav flex-column nav-pills nav-fill px-2">
-        {topics.map((topic, index) => (
+        {topics.map((topic: string, index: number) => (
           <li key={index} className="nav-item w-100">
             <button
               className={cn("w-100 text-start btn btn", {

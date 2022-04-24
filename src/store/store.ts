@@ -1,5 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
+import channelReducer from './reducers/channelReducer';
 
 export default configureStore({
-  reducer: {}
+  reducer: {
+    channel: channelReducer
+  }
 })
