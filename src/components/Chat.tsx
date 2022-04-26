@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addPost } from "../store/reducers/chatReducer";
 
 const Chat = () => {
+  const posts = useSelector((state: any) => state.posts);
+  const dispatch = useDispatch();
+  const [message, setMessage] = useState("");
+
+  const handleChange = (e: any) => {
+    setMessage(e.target.value);
+  };
+
   return (
     <div className="d-flex flex-column h-100">
       <div className="bg-light mb-4 p-3 shadow-sm small">
         <p className="m-0">#random</p>
-        <span className="text-muted">32 messages</span>
+        <span className="text-muted">{posts.length} messages</span>
       </div>
       <div id="message__box" className="chat-messages overflow-auto px-5">
-        <div className="text-break mb-2">
-          <b>Author</b>: Hello
-        </div>
+        {posts.map((post: any, index: number) => (
+          <div className="text-break mb-2" key={index}>
+            <b>{post.username}</b>: {post.message}
+          </div>
+        ))}
       </div>
       <div className="mt-auto px-5 py-3">
         <form noValidate className="py-1 border rounded-2">
@@ -20,8 +32,14 @@ const Chat = () => {
               className="border-0 p-0 ps-2 form-control"
               aria-label="Новое сообщение"
               placeholder="Text message..."
+              value={message}
+              onChange={handleChange}
             />
-            <button className="text-primary btn btn-group-vertical">
+            <button
+              type="button"
+              className="text-primary btn btn-group-vertical"
+              onClick={() => dispatch(addPost({ username: "Hazret", message }))}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
