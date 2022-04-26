@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addChannel } from "../store/reducers/channelReducer";
+import { addNewChannel } from "../store/reducers/channelReducer";
 
 const Modalbox = () => {
   const dispatch = useDispatch();
-  const [text, setText] = useState("");
+  const [channelName, setChannelName] = useState("");
+  const newChannel = {
+    channelName: `#${channelName}`,
+    posts: [],
+  };
 
   const handleChange = (e: any) => {
-    setText(e.target.value);
+    setChannelName(e.target.value);
   };
 
   return (
@@ -37,7 +41,7 @@ const Modalbox = () => {
                 className="form-control mb-2"
                 name="name"
                 id="name"
-                value={text}
+                value={channelName}
                 onChange={handleChange}
               />
             </form>
@@ -53,7 +57,7 @@ const Modalbox = () => {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={() => dispatch(addChannel(text))}
+              onClick={() => dispatch(addNewChannel(newChannel))}
             >
               Send
             </button>

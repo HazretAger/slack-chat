@@ -1,11 +1,16 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addPost } from "../store/reducers/chatReducer";
+import { useSelector, useDispatch } from "react-redux";
+import { addNewPost } from "../store/reducers/channelReducer";
 
 const Chat = () => {
-  const posts = useSelector((state: any) => state.posts);
+  const channels = useSelector((state: any) => state.channelReducer.channels);
   const dispatch = useDispatch();
+  const activeChannelId = useSelector(
+    (state: any) => state.channelReducer.activeChannel
+  );
+
   const [message, setMessage] = useState("");
+  const { channelName, posts } = channels[activeChannelId];
 
   const handleChange = (e: any) => {
     setMessage(e.target.value);
@@ -14,13 +19,13 @@ const Chat = () => {
   return (
     <div className="d-flex flex-column h-100">
       <div className="bg-light mb-4 p-3 shadow-sm small">
-        <p className="m-0">#random</p>
+        <p className="m-0">{channelName}</p>
         <span className="text-muted">{posts.length} messages</span>
       </div>
       <div id="message__box" className="chat-messages overflow-auto px-5">
         {posts.map((post: any, index: number) => (
           <div className="text-break mb-2" key={index}>
-            <b>{post.username}</b>: {post.message}
+            <b>{post.userName}</b>: {post.message}
           </div>
         ))}
       </div>
@@ -38,7 +43,9 @@ const Chat = () => {
             <button
               type="button"
               className="text-primary btn btn-group-vertical"
-              onClick={() => dispatch(addPost({ username: "Hazret", message }))}
+              onClick={() =>
+                dispatch(addNewPost({ userName: "Xazik", message }))
+              }
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
