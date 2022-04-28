@@ -11,7 +11,7 @@ const Sidebar = () => {
 
   const channelToggler = (index: number) => {
     setActiveButton(index);
-    dispatch(activeChannelId(activeButton));
+    dispatch(activeChannelId(index));
   };
 
   return (
