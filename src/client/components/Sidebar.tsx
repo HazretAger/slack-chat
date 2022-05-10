@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { activeChannelId } from "../store/reducers/channelReducer";
+import { activeChannelId } from "../store/reducer";
 import Modalbox from "./Modalbox";
 import cn from "classnames";
 
 const Sidebar = () => {
-  const channels = useSelector((state: any) => state.channelReducer.channels);
+  const channels = useSelector((state: any) => state.toolkit.channels);
   const [activeButton, setActiveButton] = useState(0);
   const dispatch = useDispatch();
 

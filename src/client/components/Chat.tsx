@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addNewPost } from "../store/reducers/channelReducer";
+import { addNewPost } from "../store/reducer";
 
 const Chat = () => {
-  const channels = useSelector((state: any) => state.channelReducer.channels);
+  const channels = useSelector((state: any) => state.toolkit.channels);
   const dispatch = useDispatch();
   const activeChannelId = useSelector(
-    (state: any) => state.channelReducer.activeChannel
+    (state: any) => state.toolkit.activeChannel
   );
 
   const [message, setMessage] = useState("");
@@ -17,7 +17,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="d-flex flex-column h-100">
+    <div className="d-flex flex-column overflow-hidden h-100">
       <div className="bg-light mb-4 p-3 shadow-sm small">
         <p className="m-0">{channelName}</p>
         <span className="text-muted">{posts.length} messages</span>

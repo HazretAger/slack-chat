@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addNewChannel } from "../store/reducers/channelReducer";
+import { addNewChannel } from "../store/reducer";
 
 const Modalbox = () => {
   const dispatch = useDispatch();
