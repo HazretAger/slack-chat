@@ -1,30 +1,33 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
+import { IInitState } from '../types/types';
+
+const initialState: IInitState = {
+  activeChannel: 0,
+  channels: [
+    {
+      channelName: '#general',
+      posts: [
+        {
+          userName: 'Hazret',
+          message: 'Hello'
+        }
+      ],
+    },
+    {
+      channelName: '#random',
+      posts: [
+        {
+          userName: 'Amir',
+          message: 'Hi'
+        }
+      ],
+    },
+  ]
+}
 
 export const counterSlice = createSlice({
   name: 'channels',
-  initialState: {
-    activeChannel: 0,
-    channels: [
-      {
-        channelName: '#general',
-        posts: [
-          {
-            userName: 'Hazret',
-            message: 'Hello'
-          }
-        ],
-      },
-      {
-        channelName: '#random',
-        posts: [
-          {
-            userName: 'Amir',
-            message: 'Hi'
-          }
-        ],
-      },
-    ]
-  },
+  initialState,
   reducers: {
       addNewChannel: (state, action) => {
         state.channels.push(action.payload);

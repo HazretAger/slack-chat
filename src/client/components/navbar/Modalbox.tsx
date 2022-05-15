@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addNewChannel } from "../store/reducer";
+import React, { ChangeEvent, useState } from "react";
+import { useAppDispatch } from "../../types/types";
+import { addNewChannel } from "../../store/reducer";
 
 const Modalbox = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [channelName, setChannelName] = useState("");
   const newChannel = {
     channelName: `#${channelName}`,
     posts: [],
   };
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setChannelName(e.target.value);
   };
 

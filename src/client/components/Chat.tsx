@@ -1,18 +1,19 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState, ChangeEvent } from "react";
+import { useAppSelector, useAppDispatch } from "../types/types";
 import { addNewPost } from "../store/reducer";
 
 const Chat = () => {
-  const channels = useSelector((state: any) => state.toolkit.channels);
-  const dispatch = useDispatch();
-  const activeChannelId = useSelector(
-    (state: any) => state.toolkit.activeChannel
+  const channels = useAppSelector((state) => state.toolkit.channels);
+  const dispatch = useAppDispatch();
+
+  const activeChannelId = useAppSelector(
+    (state) => state.toolkit.activeChannel
   );
 
-  const [message, setMessage] = useState("");
+  const [ message, setMessage ] = useState("");
   const { channelName, posts } = channels[activeChannelId];
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
   };
 
@@ -23,9 +24,9 @@ const Chat = () => {
         <span className="text-muted">{posts.length} messages</span>
       </div>
       <div id="message__box" className="chat-messages overflow-auto px-5">
-        {posts.map((post: any, index: number) => (
+        {posts.map(({ userName, message }, index: number) => (
           <div className="text-break mb-2" key={index}>
-            <b>{post.userName}</b>: {post.message}
+            <b>{ userName }</b>: { message }
           </div>
         ))}
       </div>

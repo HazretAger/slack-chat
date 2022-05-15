@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { activeChannelId } from "../store/reducer";
+import { useAppSelector, useAppDispatch } from "../../types/types";
+import { activeChannelId } from "../../store/reducer";
 import Modalbox from "./Modalbox";
 import cn from "classnames";
 
 const Sidebar = () => {
-  const channels = useSelector((state: any) => state.toolkit.channels);
+  const channels = useAppSelector((state) => state.toolkit.channels);
   const [activeButton, setActiveButton] = useState(0);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const channelToggler = (index: number) => {
     setActiveButton(index);
@@ -38,7 +38,7 @@ const Sidebar = () => {
         <Modalbox />
       </div>
       <ul className="nav flex-column nav-pills nav-fill px-2">
-        {channels.map((channel: any, index: number) => (
+        {channels.map(({ channelName }, index: number) => (
           <li key={index} className="nav-item w-100">
             <button
               className={cn("w-100 text-start btn btn", {
@@ -46,7 +46,7 @@ const Sidebar = () => {
               })}
               onClick={() => channelToggler(index)}
             >
-              {channel.channelName}
+              {channelName}
             </button>
           </li>
         ))}
